@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AUTO JAMIS – autoservis Zubrohlava | opravy a údržba vozidiel</title>
+  <meta name="description" content="AUTO JAMIS, s.r.o. – autoservis v Zubrohlave na Orave. Opravy a údržba motorových vozidiel od roku 2017. Výhonová 542, Zubrohlava. Volajte +421 918 142 068.">
+  <meta name="theme-color" content="#0c0e11">
+  <meta property="og:title" content="AUTO JAMIS – autoservis Zubrohlava">
+  <meta property="og:description" content="Opravy a údržba motorových vozidiel na Orave. Výhonová 542, Zubrohlava.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="sk_SK">
+
+  <!-- Ikona v záložke prehliadača (vložená priamo, netreba ďalší súbor) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0e11'/%3E%3Cpath d='M38 14v26c0 7-4 11-11 11-4 0-7-1-10-4l5-6c1 2 3 3 5 3s3-1 3-4V14z' fill='%23ffb400'/%3E%3C/svg%3E">
+
+  <!-- Štruktúrované údaje pre Google (pomáhajú vo vyhľadávaní a v Mapách) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "AUTO JAMIS, s.r.o.",
+    "telephone": "+421918142068",
+    "foundingDate": "2017-03-28",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Výhonová 542",
+      "postalCode": "029 43",
+      "addressLocality": "Zubrohlava",
+      "addressCountry": "SK"
+    },
+    "areaServed": ["Zubrohlava", "Námestovo", "Orava"]
+  }
+  </script>
+
+  <style>
+    /* ============================================================
+       1. PREMENNÉ – farby a rozmery meníš na jednom mieste
+       ============================================================ */
+    :root {
+      --bg: #0c0e11;          /* hlavné tmavé pozadie */
+      --bg-2: #13161b;        /* o stupeň svetlejšie pozadie sekcií */
+      --card: #181c22;        /* pozadie kariet */
+      --line: #262b33;        /* jemné linky a okraje */
+      --text: #eef0f3;        /* hlavný text */
+      --muted: #9aa3ae;       /* tlmený text */
+      --accent: #ffb400;      /* dielenská žltá – hlavná farba značky */
+      --accent-ink: #171200;  /* text na žltom podklade */
+      --radius: 18px;
+      --wrap: 1180px;
+      --font: "Inter", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* ============================================================
+       2. ZÁKLAD
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { text-wrap: balance; }
+    .wrap { width: min(100% - 40px, var(--wrap)); margin-inline: auto; }
+    section { padding: clamp(72px, 10vw, 128px) 0; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+    /* Malý nadpis nad hlavným nadpisom sekcie */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent);
+    }
+    .eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--accent); }
+    .section-title {
+      font-size: clamp(32px, 4.6vw, 54px);
+      font-weight: 800; line-height: 1.05; letter-spacing: -.03em;
+      margin: 16px 0 18px;
+    }
+    .section-lead { color: var(--muted); font-size: clamp(16px, 1.4vw, 19px); max-width: 620px; }
+
+    /* ============================================================
+       3. TLAČIDLÁ
+       ============================================================ */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 16px 26px; border-radius: 999px;
+      font-weight: 700; font-size: 16px; line-height: 1;
+      border: 1.5px solid transparent; cursor: pointer;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 10px 34px -10px rgba(255,180,0,.55); }
+    .btn-primary:hover { background: #ffc633; }
+    .btn-ghost { border-color: var(--line); color: var(--text); background: rgba(255,255,255,.02); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ============================================================
+       4. HLAVIČKA (ostáva hore pri skrolovaní)
+       ============================================================ */
+    .header {
+      position: fixed; inset: 0 0 auto 0; z-index: 50;
+      transition: background .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .header.scrolled {
+      background: rgba(12,14,17,.82);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom-color: var(--line);
+    }
+    .header .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: -.02em; }
+    .logo-mark {
+      width: 40px; height: 40px; border-radius: 11px; background: var(--accent);
+      display: grid; place-items: center; color: var(--accent-ink); font-weight: 900; font-size: 22px;
+      transform: skewX(-8deg);
+    }
+    .logo span span { color: var(--accent); }
+    .nav { display: flex; align-items: center; gap: 34px; }
+    .nav a { font-size: 15px; font-weight: 600; color: var(--muted); transition: color .2s; }
+    .nav a:hover { color: var(--text); }
+    .header-cta { padding: 12px 20px; font-size: 15px; }
+    .burger {
+      display: none; width: 46px; height: 46px; border-radius: 12px;
+      background: var(--card); border: 1px solid var(--line); cursor: pointer; padding: 0;
+      place-items: center;
+    }
+    .burger span, .burger span::before, .burger span::after {
+      content: ""; display: block; width: 20px; height: 2px; background: var(--text); border-radius: 2px;
+      transition: transform .25s ease, opacity .2s ease;
+    }
+    .burger span { position: relative; }
+    .burger span::before { position: absolute; top: -6px; }
+    .burger span::after { position: absolute; top: 6px; }
+    .burger[aria-expanded="true"] span { background: transparent; }
+    .burger[aria-expanded="true"] span::before { transform: translateY(6px) rotate(45deg); }
+    .burger[aria-expanded="true"] span::after { transform: translateY(-6px) rotate(-45deg); }
+
+    /* ============================================================
+       5. ÚVOD (HERO)
+       ============================================================ */
+    .hero {
+      position: relative; min-height: 100svh;
+      display: flex; align-items: center;
+      padding: 140px 0 90px; overflow: hidden;
+    }
+    /* jemná mriežka a žltá žiara v pozadí */
+    .hero::before {
+      content: ""; position: absolute; inset: 0; z-index: -2;
+      background:
+        radial-gradient(900px 520px at 85% 20%, rgba(255,180,0,.16), transparent 60%),
+        radial-gradient(700px 500px at 0% 100%, rgba(255,180,0,.07), transparent 60%),
+        linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 64px 64px,
+        linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 64px 64px;
+      opacity: .55;
+      -webkit-mask-image: linear-gradient(#000 55%, transparent);
+              mask-image: linear-gradient(#000 55%, transparent);
+    }
+    /* obrovský obrysový nápis v pozadí */
+    .hero-ghost {
+      position: absolute; right: -3vw; bottom: -4vw; z-index: -1;
+      font-size: clamp(140px, 27vw, 430px); font-weight: 900; line-height: .8; letter-spacing: -.06em;
+      color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.07);
+      user-select: none; pointer-events: none; font-style: italic;
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 16px 8px 10px; border-radius: 999px;
+      background: var(--card); border: 1px solid var(--line);
+      font-size: 14px; font-weight: 600; color: var(--muted);
+    }
+    .badge i { width: 10px; height: 10px; border-radius: 50%; background: #35d07f; box-shadow: 0 0 0 5px rgba(53,208,127,.18); }
+    .hero h1 {
+      font-size: clamp(44px, 7.4vw, 98px);
+      font-weight: 900; line-height: .95; letter-spacing: -.045em;
+      margin: 26px 0 24px;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--muted); max-width: 540px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+
+    /* Karta vpravo v úvode */
+    .hero-card {
+      position: relative; background: linear-gradient(160deg, #1b2027, #12151a);
+      border: 1px solid var(--line); border-radius: 26px; padding: 34px;
+      box-shadow: 0 40px 80px -30px rgba(0,0,0,.7);
+    }
+    .hero-card::before { /* výstražné pruhy hore */
+      content: ""; position: absolute; left: 34px; right: 34px; top: -1px; height: 8px; border-radius: 0 0 8px 8px;
+      background: repeating-linear-gradient(-45deg, var(--accent) 0 14px, #111 14px 28px);
+    }
+    .hero-card h2 { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-top: 10px; }
+    .hero-phone { display: block; font-size: clamp(28px, 3.2vw, 40px); font-weight: 900; letter-spacing: -.03em; margin: 10px 0 24px; transition: color .2s; }
+    .hero-phone:hover { color: var(--accent); }
+    .info-row { display: flex; gap: 14px; padding: 16px 0; border-top: 1px solid var(--line); }
+    .info-row svg { width: 22px; height: 22px; color: var(--accent); flex: none; margin-top: 2px; }
+    .info-row b { display: block; font-size: 16px; }
+    .info-row small { color: var(--muted); font-size: 14px; }
+
+    /* Pás s faktami pod úvodom */
+    .facts { border-block: 1px solid var(--line); background: var(--bg-2); }
+    .facts .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .fact { padding: 34px 24px; border-left: 1px solid var(--line); }
+    .fact:first-child { border-left: 0; padding-left: 0; }
+    .fact strong { display: block; font-size: clamp(26px, 3vw, 40px); font-weight: 900; letter-spacing: -.03em; line-height: 1.1; }
+    .fact strong span { color: var(--accent); }
+    .fact small { color: var(--muted); font-size: 14px; }
+
+    /* ============================================================
+       6. SLUŽBY
+       ============================================================ */
+    .services-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; flex-wrap: wrap; margin-bottom: 52px; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .service {
+      position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 28px 26px 30px; overflow: hidden;
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .service::after { /* žltá čiara, ktorá sa pri prejdení myšou roztiahne */
+      content: ""; position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: var(--accent);
+      transition: width .35s ease;
+    }
+    .service:hover { transform: translateY(-6px); border-color: #3a414c; background: #1c2128; }
+    .service:hover::after { width: 100%; }
+    .service-icon {
+      width: 54px; height: 54px; border-radius: 14px; display: grid; place-items: center;
+      background: rgba(255,180,0,.1); color: var(--accent); margin-bottom: 22px;
+    }
+    .service-icon svg { width: 26px; height: 26px; }
+    .service h3 { font-size: 19px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 8px; }
+    .service p { color: var(--muted); font-size: 15px; }
+    .service-num { position: absolute; top: 22px; right: 24px; font-size: 13px; font-weight: 700; color: #4a525e; letter-spacing: .08em; }
+
+    /* ============================================================
+       7. AKO TO PREBIEHA
+       ============================================================ */
+    .process { background: var(--bg-2); border-block: 1px solid var(--line); }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 52px; counter-reset: step; }
+    .step { position: relative; padding: 34px 30px; border-radius: var(--radius); border: 1px dashed #343b46; }
+    .step::before {
+      counter-increment: step; content: "0" counter(step);
+      display: block; font-size: 64px; font-weight: 900; line-height: 1; letter-spacing: -.04em; font-style: italic;
+      color: transparent; -webkit-text-stroke: 1.5px var(--accent); margin-bottom: 20px;
+    }
+    .step h3 { font-size: 21px; font-weight: 700; margin-bottom: 8px; }
+    .step p { color: var(--muted); font-size: 15.5px; }
+
+    /* ============================================================
+       8. RECENZIE
+       ============================================================ */
+    .reviews-box {
+      display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;
+      background: linear-gradient(135deg, #1b2027, #14171c);
+      border: 1px solid var(--line); border-radius: 28px; padding: clamp(30px, 5vw, 60px);
+      position: relative; overflow: hidden;
+    }
+    .reviews-box::after {
+      content: "“"; position: absolute; right: 30px; top: -70px;
+      font-size: 380px; line-height: 1; font-weight: 900; color: rgba(255,180,0,.07); pointer-events: none;
+    }
+    .stars { display: flex; gap: 6px; color: var(--accent); margin-bottom: 18px; }
+    .stars svg { width: 26px; height: 26px; }
+    .reviews-actions { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
+    /* Mriežka pre karty s recenziami – použije sa, keď ich doplníš (pozri komentár v HTML) */
+    .review-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 22px; }
+    .review-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+    .review-card p { color: #d5d9df; font-size: 16px; margin: 14px 0 18px; }
+    .review-card b { font-size: 15px; }
+    .review-card small { display: block; color: var(--muted); font-size: 13px; }
+
+    /* ============================================================
+       9. KONTAKT + MAPA
+       ============================================================ */
+    .contact { background: var(--bg-2); border-top: 1px solid var(--line); }
+    .contact-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; margin-top: 52px; align-items: stretch; }
+    .contact-card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: clamp(26px, 3.4vw, 40px); }
+    .contact-item { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+    .contact-item:first-child { padding-top: 0; }
+    .contact-item svg { width: 24px; height: 24px; color: var(--accent); flex: none; margin-top: 3px; }
+    .contact-item small { display: block; color: var(--muted); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+    .contact-item a, .contact-item span.val { font-size: 19px; font-weight: 700; }
+    .contact-item a:hover { color: var(--accent); }
+    .hours { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 16px; }
+    .hours td { padding: 5px 0; }
+    .hours td:last-child { text-align: right; font-weight: 700; }
+    .todo { color: var(--accent); font-weight: 700; } /* žlto označené miesta, ktoré treba doplniť */
+    .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+    .map { border-radius: 24px; overflow: hidden; border: 1px solid var(--line); min-height: 440px; background: var(--card); }
+    .map iframe { width: 100%; height: 100%; min-height: 440px; border: 0; filter: grayscale(.35) contrast(1.05); }
+
+    /* ============================================================
+       10. PÄTIČKA
+       ============================================================ */
+    .footer { padding: 54px 0 110px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14.5px; }
+    .footer-grid { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+    .footer b { color: var(--text); }
+    .footer-legal { line-height: 1.9; }
+    .footer-bottom { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 13.5px; }
+
+    /* Spodná lišta na mobile – tlačidlá Zavolať / Navigovať stále po ruke */
+    .mobile-bar {
+      display: none; position: fixed; inset: auto 0 0 0; z-index: 60;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); gap: 10px;
+      background: rgba(12,14,17,.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--line);
+    }
+    .mobile-bar .btn { flex: 1; padding: 15px 10px; }
+
+    /* ============================================================
+       11. ANIMÁCIA PRI SKROLOVANÍ
+       ============================================================ */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .btn, .service { transition: none; }
+    }
+
+    /* ============================================================
+       12. MOBIL A TABLET
+       ============================================================ */
+    @media (max-width: 1020px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .review-cards { grid-template-columns: 1fr; }
+      .reviews-box { grid-template-columns: 1fr; }
+      .reviews-actions { flex-direction: row; flex-wrap: wrap; }
+    }
+    @media (max-width: 760px) {
+      .burger { display: grid; }
+      .header-cta { display: none; }
+      .nav {
+        position: fixed; inset: 76px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0;
+        background: rgba(12,14,17,.97); border-bottom: 1px solid var(--line);
+        padding: 8px 20px 20px; transform: translateY(-130%); transition: transform .3s ease; visibility: hidden;
+      }
+      .nav.open { transform: none; visibility: visible; }
+      .nav a { padding: 16px 0; font-size: 18px; color: var(--text); border-bottom: 1px solid var(--line); }
+      .hero { padding-top: 120px; min-height: auto; }
+      .facts .wrap { grid-template-columns: repeat(2, 1fr); }
+      .fact { padding: 24px 18px; }
+      .fact:nth-child(odd) { border-left: 0; padding-left: 0; }
+      .fact:nth-child(n+3) { border-top: 1px solid var(--line); }
+      .services-grid, .steps { grid-template-columns: 1fr; }
+      .mobile-bar { display: flex; }
+      .hero-actions .btn { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HLAVIČKA ================= -->
+  <header class="header" id="header">
+    <div class="wrap">
+      <a href="#top" class="logo" aria-label="AUTO JAMIS – úvod">
+        <div class="logo-mark" aria-hidden="true">J</div>
+        <span>AUTO <span>JAMIS</span></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Hlavná navigácia">
+        <a href="#sluzby">Služby</a>
+        <a href="#postup">Ako to prebieha</a>
+        <a href="#recenzie">Recenzie</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <a href="tel:+421918142068" class="btn btn-primary header-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        0918 142 068
+      </a>
+
+      <button class="burger" id="burger" aria-label="Otvoriť menu" aria-expanded="false" aria-controls="nav"><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ================= ÚVOD ================= -->
+    <section class="hero">
+      <div class="hero-ghost" aria-hidden="true">JAMIS</div>
+      <div class="wrap hero-grid">
+        <div>
+          <div class="badge reveal"><i></i> Autoservis · Zubrohlava · Orava</div>
+          <h1 class="reveal">Vaše auto<br>v <em>dobrých</em><br>rukách.</h1>
+          <p class="hero-lead reveal">
+            AUTO JAMIS je autoservis v Zubrohlave, ktorý sa od roku 2017 stará o opravy
+            a údržbu vozidiel. Zavolajte, povedzte, čo auto trápi, a dohodneme termín.
+          </p>
+          <div class="hero-actions reveal">
+            <a href="tel:+421918142068" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+              Zavolať do servisu
+            </a>
+            <a href="#sluzby" class="btn btn-ghost">Pozrieť služby</a>
+          </div>
+        </div>
+
+        <!-- Karta s rýchlym kontaktom -->
+        <aside class="hero-card reveal" aria-label="Rýchly kontakt">
+          <h2>Objednajte sa telefonicky</h2>
+          <a class="hero-phone" href="tel:+421918142068">+421 918 142 068</a>
+
+          <div class="info-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><b>Výhonová 542, Zubrohlava</b><small>029 43 · okres Námestovo</small></div>
+          </div>
+          <div class="info-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <!-- DOPLNIŤ: skutočné otváracie hodiny -->
+            <div><b>Otváracie hodiny</b><small class="todo">doplníme</small></div>
+          </div>
+          <div class="info-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+            <div><a href="https://www.google.com/maps/dir/?api=1&destination=V%C3%BDhonov%C3%A1+542%2C+029+43+Zubrohlava" target="_blank" rel="noopener"><b>Navigovať k nám →</b></a><small>otvorí Google Mapy</small></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================= PÁS S FAKTAMI ================= -->
+    <div class="facts">
+      <div class="wrap">
+        <div class="fact reveal"><strong>2017<span>.</span></strong><small>rok založenia servisu</small></div>
+        <div class="fact reveal"><strong>Orava<span>.</span></strong><small>Zubrohlava, okres Námestovo</small></div>
+        <div class="fact reveal"><strong>5,8 km<span>.</span></strong><small>z centra Námestova</small></div>
+        <div class="fact reveal"><strong>s.r.o<span>.</span></strong><small>platiteľ DPH, faktúra k oprave</small></div>
+      </div>
+    </div>
+
+    <!-- ================= SLUŽBY =================
+         POZOR: zoznam služieb je všeobecný návrh. Uprav ho podľa toho,
+         čo servis naozaj robí (kartu zmažeš alebo skopíruješ celý <article>). -->
+    <section id="sluzby">
+      <div class="wrap">
+        <div class="services-head">
+          <div>
+            <span class="eyebrow reveal">Služby</span>
+            <h2 class="section-title reveal">Od výmeny oleja<br>po väčšie opravy.</h2>
+          </div>
+          <p class="section-lead reveal">Povedzte nám, čo auto potrebuje. Pozrieme sa naň, povieme, čo treba urobiť, a až potom sa pustíme do práce.</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service reveal">
+            <span class="service-num">01</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.3-.7-.7-2.3z"/></svg></div>
+            <h3>Opravy vozidiel</h3>
+            <p>Mechanické opravy motora, podvozku a ďalších častí auta.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">02</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.500 6-11 6-11z"/></svg></div>
+            <h3>Výmena oleja a filtrov</h3>
+            <p>Pravidelná údržba, vďaka ktorej motor vydrží dlhšie.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">03</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 20h10M12 16v4M7 11l2-3 3 4 2-2 3 3"/></svg></div>
+            <h3>Diagnostika</h3>
+            <p>Nájdeme príčinu svietiacej kontrolky aj nezvyčajného správania auta.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">04</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg></div>
+            <h3>Brzdy</h3>
+            <p>Výmena platničiek, kotúčov a brzdovej kvapaliny.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">05</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M6 17l1.500-6h9L18 17M9 11V7h6v4M4 21h3M17 21h3"/></svg></div>
+            <h3>Podvozok a tlmiče</h3>
+            <p>Čapy, ramená, tlmiče a pružiny pre bezpečnú a pokojnú jazdu.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">06</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v5M12 16v5M4.200 7.500l4.300 2.500M15.500 14l4.300 2.500M4.200 16.500l4.300-2.500M15.500 10l4.300-2.500"/></svg></div>
+            <h3>Pneuservis</h3>
+            <p>Prezutie, vyváženie a kontrola stavu pneumatík.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">07</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4 6l16 12M20 6L4 18M9 3l3 3 3-3M9 21l3-3 3 3"/></svg></div>
+            <h3>Klimatizácia</h3>
+            <p>Plnenie, čistenie a kontrola tesnosti klimatizácie.</p>
+          </article>
+          <article class="service reveal">
+            <span class="service-num">08</span>
+            <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div>
+            <h3>Príprava na STK</h3>
+            <p>Auto skontrolujeme a pripravíme na technickú a emisnú kontrolu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= AKO TO PREBIEHA ================= -->
+    <section class="process" id="postup">
+      <div class="wrap">
+        <span class="eyebrow reveal">Ako to prebieha</span>
+        <h2 class="section-title reveal">Tri kroky a auto<br>je späť na ceste.</h2>
+
+        <div class="steps">
+          <div class="step reveal">
+            <h3>Zavolajte nám</h3>
+            <p>Opíšte problém alebo servis, ktorý auto potrebuje. Dohodneme termín, ktorý vám vyhovuje.</p>
+          </div>
+          <div class="step reveal">
+            <h3>Auto prezrieme</h3>
+            <p>Zistíme, čo treba opraviť, a vopred vám povieme, čo budeme robiť a koľko to bude stáť.</p>
+          </div>
+          <div class="step reveal">
+            <h3>Opravíme a odovzdáme</h3>
+            <p>Po oprave vám auto odovzdáme, vysvetlíme, čo sme urobili, a vystavíme faktúru.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= RECENZIE ================= -->
+    <section id="recenzie">
+      <div class="wrap">
+        <div class="reviews-box reveal">
+          <div style="position:relative; z-index:1">
+            <div class="stars" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.100 6.300 6.900 1-5 4.900 1.200 6.900L12 17.800 5.800 21.100 7 14.200 2 9.300l6.900-1z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.100 6.300 6.900 1-5 4.900 1.200 6.900L12 17.800 5.800 21.100 7 14.200 2 9.300l6.900-1z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.100 6.300 6.900 1-5 4.900 1.200 6.900L12 17.800 5.800 21.100 7 14.200 2 9.300l6.900-1z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.100 6.300 6.900 1-5 4.900 1.200 6.900L12 17.800 5.800 21.100 7 14.200 2 9.300l6.900-1z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.100 6.300 6.900 1-5 4.900 1.200 6.900L12 17.800 5.800 21.100 7 14.200 2 9.300l6.900-1z"/></svg>
+            </div>
+            <span class="eyebrow">Recenzie zákazníkov</span>
+            <h2 class="section-title">Čo o nás hovoria<br>naši zákazníci.</h2>
+            <p class="section-lead">Skúsenosti zákazníkov si môžete prečítať priamo na Google Mapách. Boli ste u nás? Budeme radi, ak nám tam necháte hodnotenie.</p>
+          </div>
+          <div class="reviews-actions">
+            <a class="btn btn-primary" target="_blank" rel="noopener" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4715cf0f9afb4297:0x2372472ab6a1763f">Recenzie na Google</a>
+            <a class="btn btn-ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4715cf0f9afb4297:0x2372472ab6a1763f">Napísať recenziu</a>
+          </div>
+        </div>
+
+        <!-- DOPLNIŤ: skutočné recenzie z Google Máp.
+             Skopíruj text recenzie a meno autora presne tak, ako sú na Google,
+             vlož ich do šablóny nižšie a odstráň značky komentára okolo nej.
+
+        <div class="review-cards">
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>„Text recenzie z Google.“</p>
+            <b>Meno zákazníka</b>
+            <small>recenzia na Google</small>
+          </article>
+        </div>
+        -->
+      </div>
+    </section>
+
+    <!-- ================= KONTAKT ================= -->
+    <section class="contact" id="kontakt">
+      <div class="wrap">
+        <span class="eyebrow reveal">Kontakt</span>
+        <h2 class="section-title reveal">Kde nás nájdete.</h2>
+
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+              <div><small>Telefón</small><a href="tel:+421918142068">+421 918 142 068</a></div>
+            </div>
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div><small>Adresa</small><span class="val">Výhonová 542<br>029 43 Zubrohlava</span></div>
+            </div>
+            <div class="contact-item" style="border-bottom:0; padding-bottom:0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              <div style="flex:1">
+                <small>Otváracie hodiny</small>
+                <!-- DOPLNIŤ: skutočné otváracie hodiny (prepíš slovo „doplníme“ a zmaž class="todo") -->
+                <table class="hours">
+                  <tr><td>Pondelok – Piatok</td><td class="todo">doplníme</td></tr>
+                  <tr><td>Sobota</td><td class="todo">doplníme</td></tr>
+                  <tr><td>Nedeľa</td><td class="todo">doplníme</td></tr>
+                </table>
+              </div>
+            </div>
+            <div class="contact-actions">
+              <a href="tel:+421918142068" class="btn btn-primary">Zavolať</a>
+              <a href="https://www.google.com/maps/dir/?api=1&destination=V%C3%BDhonov%C3%A1+542%2C+029+43+Zubrohlava" target="_blank" rel="noopener" class="btn btn-ghost">Navigovať</a>
+            </div>
+          </div>
+
+          <div class="map reveal">
+            <iframe
+              title="Mapa – AUTO JAMIS, Výhonová 542, Zubrohlava"
+              src="https://www.google.com/maps?q=AUTO+JAMIS%2C+V%C3%BDhonov%C3%A1+542%2C+029+43+Zubrohlava&z=15&output=embed"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= PÄTIČKA ================= -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <a href="#top" class="logo" style="margin-bottom:14px">
+            <div class="logo-mark" aria-hidden="true">J</div>
+            <span style="color:var(--text)">AUTO <span>JAMIS</span></span>
+          </a>
+          <p>Autoservis v Zubrohlave na Orave.</p>
+        </div>
+        <div class="footer-legal">
+          <b>AUTO JAMIS, s.r.o.</b><br>
+          Výhonová 542, 029 43 Zubrohlava<br>
+          IČO: 50741501 · DIČ: 2120478943 · IČ DPH: SK2120478943
+        </div>
+      </div>
+      <div class="footer-bottom">© <span id="year">2026</span> AUTO JAMIS, s.r.o. Všetky práva vyhradené.</div>
+    </div>
+  </footer>
+
+  <!-- Spodná lišta – zobrazuje sa len na mobile -->
+  <div class="mobile-bar">
+    <a href="tel:+421918142068" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      Zavolať
+    </a>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=V%C3%BDhonov%C3%A1+542%2C+029+43+Zubrohlava" target="_blank" rel="noopener" class="btn btn-ghost">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+      Navigovať
+    </a>
+  </div>
+
+  <script>
+    // 1) Hlavička dostane tmavé pozadie, keď sa stránka posunie nižšie
+    var header = document.getElementById('header');
+    function onScroll() { header.classList.toggle('scrolled', window.scrollY > 20); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // 2) Mobilné menu – otvorenie a zatvorenie
+    var burger = document.getElementById('burger');
+    var nav = document.getElementById('nav');
+    function setMenu(open) {
+      nav.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Zavrieť menu' : 'Otvoriť menu');
+    }
+    burger.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+    nav.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+    // 3) Plynulé objavovanie prvkov pri skrolovaní
+    var items = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12 });
+      items.forEach(function (el, i) {
+        el.style.transitionDelay = (i % 4) * 70 + 'ms'; // jemné oneskorenie medzi susednými prvkami
+        io.observe(el);
+      });
+    } else {
+      items.forEach(function (el) { el.classList.add('in'); });
+    }
+
+    // 4) Aktuálny rok v pätičke
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
