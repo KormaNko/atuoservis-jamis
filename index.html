@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AUTO JAMIS – autoservis Zubrohlava | opravy a údržba vozidiel</title>
-  <meta name="description" content="AUTO JAMIS, s.r.o. – autoservis v Zubrohlave na Orave. Opravy a údržba motorových vozidiel od roku 2017. Výhonová 542, Zubrohlava. Volajte +421 918 142 068.">
+  <title>Autoservis JAMIS Zubrohlava | opravy a údržba vozidiel</title>
+  <meta name="description" content="Sme autoservis v Zubrohlave na Orave. Autá opravujeme a servisujeme od roku 2017. Nájdete nás na Výhonovej 542, otvorené máme Po – Pi 8:00 – 17:00. Volajte +421 918 142 068.">
   <meta name="theme-color" content="#0c0e11">
   <meta property="og:title" content="AUTO JAMIS – autoservis Zubrohlava">
-  <meta property="og:description" content="Opravy a údržba motorových vozidiel na Orave. Výhonová 542, Zubrohlava.">
+  <meta property="og:description" content="Opravujeme a servisujeme autá na Orave. Nájdete nás na Výhonovej 542 v Zubrohlave.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="sk_SK">
 
@@ -22,6 +22,7 @@
     "name": "AUTO JAMIS, s.r.o.",
     "telephone": "+421918142068",
     "foundingDate": "2017-03-28",
+    "openingHours": "Mo-Fr 08:00-17:00",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Výhonová 542",
@@ -181,11 +182,13 @@
     }
     .badge i { width: 10px; height: 10px; border-radius: 50%; background: #35d07f; box-shadow: 0 0 0 5px rgba(53,208,127,.18); }
     .hero h1 {
-      font-size: clamp(44px, 7.4vw, 98px);
-      font-weight: 900; line-height: .95; letter-spacing: -.045em;
+      font-size: clamp(52px, 8.4vw, 118px);
+      font-weight: 900; line-height: .92; letter-spacing: -.045em;
       margin: 26px 0 24px;
     }
-    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero h1 em { font-style: italic; color: var(--accent); font-size: 1.28em; letter-spacing: -.05em; }
+    .hero h1 .dot { color: var(--text); }
+    .hero-tag { font-size: clamp(22px, 2.6vw, 34px); font-weight: 800; letter-spacing: -.02em; margin-bottom: 16px; }
     .hero-lead { font-size: clamp(17px, 1.6vw, 21px); color: var(--muted); max-width: 540px; }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
 
@@ -274,7 +277,15 @@
     /* Mriežka pre karty s recenziami – použije sa, keď ich doplníš (pozri komentár v HTML) */
     .review-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 22px; }
     .review-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
-    .review-card p { color: #d5d9df; font-size: 16px; margin: 14px 0 18px; }
+    .review-card { display: flex; flex-direction: column; }
+    .review-card p { color: #d5d9df; font-size: 17px; margin: 6px 0 22px; flex: 1; }
+    .rating-stars { color: var(--accent); font-size: 22px; letter-spacing: 3px; line-height: 1; }
+    .review-card .rating-stars { margin-bottom: 10px; }
+    .rating { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
+    .rating strong { font-size: clamp(56px, 7vw, 84px); font-weight: 900; line-height: 1; letter-spacing: -.04em; color: var(--accent); }
+    .rating .rating-stars { font-size: 28px; margin-bottom: 6px; }
+    .rating small { color: var(--muted); font-size: 14.5px; }
+    .badge-rating { color: var(--accent); font-weight: 700; padding-left: 12px; margin-left: 2px; border-left: 1px solid var(--line); }
     .review-card b { font-size: 15px; }
     .review-card small { display: block; color: var(--muted); font-size: 13px; }
 
@@ -290,6 +301,7 @@
     .contact-item small { display: block; color: var(--muted); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
     .contact-item a, .contact-item span.val { font-size: 19px; font-weight: 700; }
     .contact-item a:hover { color: var(--accent); }
+    .hours-note { color: var(--muted); font-size: 15px; margin-top: 6px; }
     .hours { width: 100%; border-collapse: collapse; margin-top: 4px; font-size: 16px; }
     .hours td { padding: 5px 0; }
     .hours td:last-child { text-align: right; font-weight: 700; }
@@ -392,11 +404,12 @@
       <div class="hero-ghost" aria-hidden="true">JAMIS</div>
       <div class="wrap hero-grid">
         <div>
-          <div class="badge reveal"><i></i> Autoservis · Zubrohlava · Orava</div>
-          <h1 class="reveal">Vaše auto<br>v <em>dobrých</em><br>rukách.</h1>
+          <div class="badge reveal"><i></i> Zubrohlava · Orava <span class="badge-rating">★ 5,0 na Google</span></div>
+          <h1 class="reveal">Autoservis<br><em>JAMIS</em><span class="dot">.</span></h1>
+          <p class="hero-tag reveal">Vaše auto v dobrých rukách.</p>
           <p class="hero-lead reveal">
-            AUTO JAMIS je autoservis v Zubrohlave, ktorý sa od roku 2017 stará o opravy
-            a údržbu vozidiel. Zavolajte, povedzte, čo auto trápi, a dohodneme termín.
+            Sme autoservis zo Zubrohlavy a o autá sa staráme od roku 2017.
+            Zavolajte nám, povedzte, čo vaše auto trápi, a dohodneme sa na termíne.
           </p>
           <div class="hero-actions reveal">
             <a href="tel:+421918142068" class="btn btn-primary">
@@ -418,8 +431,7 @@
           </div>
           <div class="info-row">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            <!-- DOPLNIŤ: skutočné otváracie hodiny -->
-            <div><b>Otváracie hodiny</b><small class="todo">doplníme</small></div>
+            <div><b>Otvorené máme od 8:00 do 17:00</b><small>každý pracovný deň, pondelok až piatok</small></div>
           </div>
           <div class="info-row">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
@@ -432,10 +444,10 @@
     <!-- ================= PÁS S FAKTAMI ================= -->
     <div class="facts">
       <div class="wrap">
-        <div class="fact reveal"><strong>2017<span>.</span></strong><small>rok založenia servisu</small></div>
-        <div class="fact reveal"><strong>Orava<span>.</span></strong><small>Zubrohlava, okres Námestovo</small></div>
-        <div class="fact reveal"><strong>5,8 km<span>.</span></strong><small>z centra Námestova</small></div>
-        <div class="fact reveal"><strong>s.r.o<span>.</span></strong><small>platiteľ DPH, faktúra k oprave</small></div>
+        <div class="fact reveal"><strong>2017<span>.</span></strong><small>odvtedy opravujeme autá</small></div>
+        <div class="fact reveal"><strong>Orava<span>.</span></strong><small>nájdete nás v Zubrohlave</small></div>
+        <div class="fact reveal"><strong>5,8 km<span>.</span></strong><small>sme kúsok od Námestova</small></div>
+        <div class="fact reveal"><strong>5,0 <span>★</span></strong><small><a href="#recenzie">čo o nás hovoria ľudia →</a></small></div>
       </div>
     </div>
 
@@ -457,13 +469,13 @@
             <span class="service-num">01</span>
             <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.3-.7-.7-2.3z"/></svg></div>
             <h3>Opravy vozidiel</h3>
-            <p>Mechanické opravy motora, podvozku a ďalších častí auta.</p>
+            <p>Opravíme motor, podvozok aj ďalšie časti vášho auta.</p>
           </article>
           <article class="service reveal">
             <span class="service-num">02</span>
             <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s6 6.5 6 11a6 6 0 0 1-12 0c0-4.500 6-11 6-11z"/></svg></div>
             <h3>Výmena oleja a filtrov</h3>
-            <p>Pravidelná údržba, vďaka ktorej motor vydrží dlhšie.</p>
+            <p>Postaráme sa o pravidelnú údržbu, aby motor vydržal čo najdlhšie.</p>
           </article>
           <article class="service reveal">
             <span class="service-num">03</span>
@@ -475,25 +487,25 @@
             <span class="service-num">04</span>
             <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg></div>
             <h3>Brzdy</h3>
-            <p>Výmena platničiek, kotúčov a brzdovej kvapaliny.</p>
+            <p>Vymeníme platničky, kotúče aj brzdovú kvapalinu.</p>
           </article>
           <article class="service reveal">
             <span class="service-num">05</span>
             <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14M6 17l1.500-6h9L18 17M9 11V7h6v4M4 21h3M17 21h3"/></svg></div>
             <h3>Podvozok a tlmiče</h3>
-            <p>Čapy, ramená, tlmiče a pružiny pre bezpečnú a pokojnú jazdu.</p>
+            <p>Opravíme čapy, ramená, tlmiče aj pružiny, aby ste jazdili bezpečne.</p>
           </article>
           <article class="service reveal">
             <span class="service-num">06</span>
             <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v5M12 16v5M4.200 7.500l4.300 2.500M15.500 14l4.300 2.500M4.200 16.500l4.300-2.500M15.500 10l4.300-2.500"/></svg></div>
             <h3>Pneuservis</h3>
-            <p>Prezutie, vyváženie a kontrola stavu pneumatík.</p>
+            <p>Prezujeme, vyvážime a skontrolujeme vaše pneumatiky.</p>
           </article>
           <article class="service reveal">
             <span class="service-num">07</span>
             <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M4 6l16 12M20 6L4 18M9 3l3 3 3-3M9 21l3-3 3 3"/></svg></div>
             <h3>Klimatizácia</h3>
-            <p>Plnenie, čistenie a kontrola tesnosti klimatizácie.</p>
+            <p>Klimatizáciu naplníme, vyčistíme a skontrolujeme jej tesnosť.</p>
           </article>
           <article class="service reveal">
             <span class="service-num">08</span>
@@ -533,16 +545,16 @@
       <div class="wrap">
         <div class="reviews-box reveal">
           <div style="position:relative; z-index:1">
-            <div class="stars" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.100 6.300 6.900 1-5 4.900 1.200 6.900L12 17.800 5.800 21.100 7 14.200 2 9.300l6.900-1z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.100 6.300 6.900 1-5 4.900 1.200 6.900L12 17.800 5.800 21.100 7 14.200 2 9.300l6.900-1z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.100 6.300 6.900 1-5 4.900 1.200 6.900L12 17.800 5.800 21.100 7 14.200 2 9.300l6.900-1z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.100 6.300 6.900 1-5 4.900 1.200 6.900L12 17.800 5.800 21.100 7 14.200 2 9.300l6.900-1z"/></svg>
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.100 6.300 6.900 1-5 4.900 1.200 6.900L12 17.800 5.800 21.100 7 14.200 2 9.300l6.900-1z"/></svg>
+            <div class="rating reveal in" aria-label="Hodnotenie 5,0 z 5 na Google">
+              <strong>5,0</strong>
+              <div>
+                <div class="rating-stars" aria-hidden="true">★★★★★</div>
+                <small>z 5 · 7 hodnotení na Google</small>
+              </div>
             </div>
             <span class="eyebrow">Recenzie zákazníkov</span>
             <h2 class="section-title">Čo o nás hovoria<br>naši zákazníci.</h2>
-            <p class="section-lead">Skúsenosti zákazníkov si môžete prečítať priamo na Google Mapách. Boli ste u nás? Budeme radi, ak nám tam necháte hodnotenie.</p>
+            <p class="section-lead">Na Google máme od zákazníkov samé päťhviezdičkové hodnotenia a veľmi si ich vážime. Boli ste u nás? Potešíme sa, ak nám tam necháte aj to svoje.</p>
           </div>
           <div class="reviews-actions">
             <a class="btn btn-primary" target="_blank" rel="noopener" href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4715cf0f9afb4297:0x2372472ab6a1763f">Recenzie na Google</a>
@@ -550,19 +562,28 @@
           </div>
         </div>
 
-        <!-- DOPLNIŤ: skutočné recenzie z Google Máp.
-             Skopíruj text recenzie a meno autora presne tak, ako sú na Google,
-             vlož ich do šablóny nižšie a odstráň značky komentára okolo nej.
-
+        <!-- Skutočné recenzie z Google Máp (texty sú prevzaté doslovne).
+             Ďalšiu recenziu pridáš skopírovaním celého <article>. -->
         <div class="review-cards">
-          <article class="review-card">
-            <div class="stars">★★★★★</div>
-            <p>„Text recenzie z Google.“</p>
-            <b>Meno zákazníka</b>
+          <article class="review-card reveal">
+            <div class="rating-stars" role="img" aria-label="5 z 5 hviezdičiek">★★★★★</div>
+            <p>Výborný a hlavne čistý autoservis. Chalani sa venujú vozidlám všetkých značiek na skutočne široko ďaleko asi najkvalitnejšiu úrovni.</p>
+            <b>Patrik Kačena</b>
+            <small>recenzia na Google</small>
+          </article>
+          <article class="review-card reveal">
+            <div class="rating-stars" role="img" aria-label="5 z 5 hviezdičiek">★★★★★</div>
+            <p>Bola som so službami veľmi spokojná. Veľká odbornosť, ústretovosť a spoľahlivosť. Vrelo odporúčam. ĎAKUJEM</p>
+            <b>Zuzka Chudá</b>
+            <small>recenzia na Google</small>
+          </article>
+          <article class="review-card reveal">
+            <div class="rating-stars" role="img" aria-label="5 z 5 hviezdičiek">★★★★★</div>
+            <p>Výborný autoservis v okolí...</p>
+            <b>Pneufit sk</b>
             <small>recenzia na Google</small>
           </article>
         </div>
-        -->
       </div>
     </section>
 
@@ -585,13 +606,9 @@
             <div class="contact-item" style="border-bottom:0; padding-bottom:0">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
               <div style="flex:1">
-                <small>Otváracie hodiny</small>
-                <!-- DOPLNIŤ: skutočné otváracie hodiny (prepíš slovo „doplníme“ a zmaž class="todo") -->
-                <table class="hours">
-                  <tr><td>Pondelok – Piatok</td><td class="todo">doplníme</td></tr>
-                  <tr><td>Sobota</td><td class="todo">doplníme</td></tr>
-                  <tr><td>Nedeľa</td><td class="todo">doplníme</td></tr>
-                </table>
+                <small>Kedy máme otvorené</small>
+<span class="val">Od pondelka do piatku<br>sme tu pre vás od 8:00 do 17:00</span>
+                <p class="hours-note">Cez víkend máme zatvorené.</p>
               </div>
             </div>
             <div class="contact-actions">
@@ -620,7 +637,7 @@
             <div class="logo-mark" aria-hidden="true">J</div>
             <span style="color:var(--text)">AUTO <span>JAMIS</span></span>
           </a>
-          <p>Autoservis v Zubrohlave na Orave.</p>
+          <p>Sme tu pre vás a vaše auto. Zubrohlava, Orava.</p>
         </div>
         <div class="footer-legal">
           <b>AUTO JAMIS, s.r.o.</b><br>
