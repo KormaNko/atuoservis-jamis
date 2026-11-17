@@ -308,7 +308,24 @@
     .todo { color: var(--accent); font-weight: 700; } /* žlto označené miesta, ktoré treba doplniť */
     .contact-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
     .map { border-radius: 24px; overflow: hidden; border: 1px solid var(--line); min-height: 440px; background: var(--card); }
-    .map iframe { width: 100%; height: 100%; min-height: 440px; border: 0; filter: grayscale(.35) contrast(1.05); }
+    .map { position: relative; flex: 1; }
+    .map-col { display: flex; flex-direction: column; gap: 12px; }
+    .map iframe { display: block; width: 100%; height: 100%; min-height: 440px; border: 0; filter: grayscale(.35) contrast(1.05); }
+    .map-cover {
+      position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; text-align: center; padding: 28px;
+      background:
+        radial-gradient(420px 300px at 50% 40%, rgba(255,180,0,.14), transparent 70%),
+        linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 44px 44px,
+        linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 44px 44px;
+    }
+    .map-pin { width: 54px; height: 54px; color: var(--accent); margin-bottom: 8px; }
+    .map-cover b { font-size: clamp(20px, 2.2vw, 26px); font-weight: 800; letter-spacing: -.02em; }
+    .map-cover p { color: var(--muted); }
+    .map-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 18px; }
+    .map-note { color: var(--muted); font-size: 14.5px; text-align: center; }
+    .map-note a { color: var(--accent); font-weight: 700; }
+    .nav .nav-go { color: var(--accent); }
 
     /* ============================================================
        10. PÄTIČKA
@@ -386,6 +403,7 @@
         <a href="#postup">Ako to prebieha</a>
         <a href="#recenzie">Recenzie</a>
         <a href="#kontakt">Kontakt</a>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=V%C3%BDhonov%C3%A1+542%2C+029+43+Zubrohlava" target="_blank" rel="noopener" class="nav-go">Navigovať ↗</a>
       </nav>
 
       <a href="tel:+421918142068" class="btn btn-primary header-cta">
@@ -404,7 +422,7 @@
       <div class="hero-ghost" aria-hidden="true">JAMIS</div>
       <div class="wrap hero-grid">
         <div>
-          <div class="badge reveal"><i></i> Zubrohlava · Orava <span class="badge-rating">★ 5,0 na Google</span></div>
+          <div class="badge reveal"><i></i> Zubrohlava · Orava <span class="badge-rating">★ 5,0</span></div>
           <h1 class="reveal">Autoservis<br><em>JAMIS</em><span class="dot">.</span></h1>
           <p class="hero-tag reveal">Vaše auto v dobrých rukách.</p>
           <p class="hero-lead reveal">
@@ -416,7 +434,10 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
               Zavolať do servisu
             </a>
-            <a href="#sluzby" class="btn btn-ghost">Pozrieť služby</a>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=V%C3%BDhonov%C3%A1+542%2C+029+43+Zubrohlava" target="_blank" rel="noopener" class="btn btn-ghost">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+              Navigovať k nám
+            </a>
           </div>
         </div>
 
@@ -447,7 +468,7 @@
         <div class="fact reveal"><strong>2017<span>.</span></strong><small>odvtedy opravujeme autá</small></div>
         <div class="fact reveal"><strong>Orava<span>.</span></strong><small>nájdete nás v Zubrohlave</small></div>
         <div class="fact reveal"><strong>5,8 km<span>.</span></strong><small>sme kúsok od Námestova</small></div>
-        <div class="fact reveal"><strong>5,0 <span>★</span></strong><small><a href="#recenzie">čo o nás hovoria ľudia →</a></small></div>
+        <div class="fact reveal"><strong>5,0 <span>★</span></strong><small><a href="#recenzie">hodnotenie na Google</a></small></div>
       </div>
     </div>
 
@@ -617,11 +638,21 @@
             </div>
           </div>
 
-          <div class="map reveal">
-            <iframe
-              title="Mapa – AUTO JAMIS, Výhonová 542, Zubrohlava"
-              src="https://www.google.com/maps?q=AUTO+JAMIS%2C+V%C3%BDhonov%C3%A1+542%2C+029+43+Zubrohlava&z=15&output=embed"
-              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <div class="map-col reveal">
+            <div class="map" id="map">
+              <!-- Táto karta je vidieť vždy. Mapa z Google sa do nej načíta až po kliknutí,
+                   takže návštevník nikdy neuvidí chybovú hlášku namiesto mapy. -->
+              <div class="map-cover">
+                <svg class="map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <b>Výhonová 542, Zubrohlava</b>
+                <p>Nájdete nás 5,8 km od Námestova.</p>
+                <div class="map-actions">
+                  <a class="btn btn-primary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=V%C3%BDhonov%C3%A1+542%2C+029+43+Zubrohlava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg> Navigovať k nám</a>
+                  <button class="btn btn-ghost" type="button" id="loadMap">Zobraziť mapu tu</button>
+                </div>
+              </div>
+            </div>
+            <p class="map-note" id="mapNote" hidden>Mapa sa nezobrazila? <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=AUTO+JAMIS%2C+V%C3%BDhonov%C3%A1+542%2C+029+43+Zubrohlava">Otvorte si nás v Google Mapách →</a></p>
           </div>
         </div>
       </div>
@@ -696,7 +727,20 @@
       items.forEach(function (el) { el.classList.add('in'); });
     }
 
-    // 4) Aktuálny rok v pätičke
+    // 4) Mapa – Google mapu vložíme až po kliknutí na „Zobraziť mapu tu“
+    var loadMap = document.getElementById('loadMap');
+    loadMap.addEventListener('click', function () {
+      var frame = document.createElement('iframe');
+      frame.title = 'Mapa – Autoservis JAMIS, Výhonová 542, Zubrohlava';
+      frame.src = 'https://www.google.com/maps?q=AUTO+JAMIS%2C+V%C3%BDhonov%C3%A1+542%2C+029+43+Zubrohlava&z=15&output=embed';
+      frame.allowFullscreen = true;
+      var map = document.getElementById('map');
+      map.innerHTML = '';                                   // odstráni kartu s tlačidlami
+      map.appendChild(frame);                               // a vloží namiesto nej mapu
+      document.getElementById('mapNote').hidden = false;    // pod mapou ostane odkaz pre istotu
+    });
+
+    // 5) Aktuálny rok v pätičkeee
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
